@@ -83,7 +83,7 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=4, min_score=0.1):
             np.copyto(image, np.array(image_pil))
     return image
 
-# Here, tutorial employed Faster Regional convolutional Neural Network with 
+# Here, tutorial employed Faster Regional Convolutional Neural Network with 
 # Inception ResNet image classification architecture of Google.
 # The following three lines are only parts requiring internet connection
 module_url = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
