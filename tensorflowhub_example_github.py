@@ -87,7 +87,9 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=4, min_score=0.1):
 # Inception ResNet image classification architecture of Google.
 # The following three lines are only parts requiring internet connection
 module_url = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
-detector = hub.load(module_url).signatures['default'] # Loading aforementioned module
+detector = hub.load(module_url).signatures['default'] # Loading aforementioned module, in case of a problem, download the module in tar.gz from 
+                                                      # tensorflow website manually and put it in the error creatign temp folder and extract 
+                                                      # till seeing .pb file and other folders
 image_url = "https://farm1.staticflickr.com/6188/6082105629_db7abe41b9_o.jpg"
 
 # Loading and resizing
@@ -105,7 +107,7 @@ scaled_img = tf.image.convert_image_dtype(img, tf.float32)[tf.newaxis, ...] # sc
 output = detector(scaled_img) # The actual RCNN processing
 
 # The list of objects detected with a specific confidence are printed with the following for loop
-for obj, confidence in list(zip(output['detection_class_entities'], output['detection_scores']))[:10]:
+for obj, confidence in list(zip(output['detection_class_entities'], output['detection_scores']))[:10]:  # the [:10] gives the 10 highest confidence detections
  print("Detected {} with {:.2f}% confidence".format(obj, confidence))
 
 # Finally, drawing boxes on the image we supplied with labels and confidence intervals (a.k.a. scores)
